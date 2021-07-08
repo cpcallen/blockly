@@ -11,4 +11,4 @@ jobs:
         with:
           release-type: node
           package-name: blockly
-          default-branch: main_test
+          default-branch: develop_test
