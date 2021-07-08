@@ -16,15 +16,16 @@ jobs:
 
       - name: "Minimal Configuration"
         id: minimal_release
-        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        with: 
+          fromTag: "v1.2"
+          toTag: "v1.4"
+        uses: mikepenz/release-changelog-builder-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: actions/create-release@v1
         with:
-          fromTag: "v1.2"
-          toTag: "v1.4"
           tag_name: ${{ steps.package-version.outputs.current-version }}
           release_name: ${{ steps.package-version.outputs.current-version }}
           body: ${{steps.github_release.outputs.changelog}}
