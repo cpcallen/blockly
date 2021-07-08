@@ -5,24 +5,26 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
 
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
-        with:
-          fetch-depth: 0
+      - name: "Minimal Configuration"
+        id: minimal_release
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         uses: actions/create-release@v1
         with:
-          fromTag: "3.20200924.4"
-          toTag: "4.20201217.0"
+          fromTag: "v1.2"
+          toTag: "v1.4"
           tag_name: ${{ steps.package-version.outputs.current-version }}
           release_name: ${{ steps.package-version.outputs.current-version }}
           body: ${{steps.github_release.outputs.changelog}}
