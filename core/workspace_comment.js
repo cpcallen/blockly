@@ -255,6 +255,7 @@ Blockly.WorkspaceComment.prototype.getContent = function() {
   return this.content_;
 };
 
+
 /**
  * Set this comment's content.
  * @param {string} content Comment content.
