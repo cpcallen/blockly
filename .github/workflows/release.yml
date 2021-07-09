@@ -15,7 +15,7 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@master
 
       - name: Push Tag
-        run: git tag -a ${{steps.package-version.outputs.current-version.}} -m "Release"
+        run: git tag -a ${{steps.package-version.outputs.current-version}} -m "Release"
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
