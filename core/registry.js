@@ -274,6 +274,7 @@ Blockly.registry.getObject = function(type, name, opt_throwIfMissing) {
 };
 
 
+
 /**
  * Gets the class from Blockly options for the given type.
  * This is used for plugins that override a built in feature. (e.g. Toolbox)
