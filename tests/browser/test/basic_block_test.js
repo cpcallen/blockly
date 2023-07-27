@@ -14,7 +14,7 @@ const {
   testSetup,
   testFileLocations,
   getAllBlocks,
-  dragNthBlockFromFlyout,
+  dragBlockTypeFromFlyout,
 } = require('./test_setup');
 const {Key} = require('webdriverio');
 
@@ -32,7 +32,13 @@ suite('Basic block tests', function (done) {
 
   test('Drag three blocks into the workspace', async function () {
     for (let i = 1; i <= 3; i++) {
-      await dragNthBlockFromFlyout(this.browser, 'Align', 0, 250, 50 * i);
+      await dragBlockTypeFromFlyout(
+        this.browser,
+        'Basic',
+        'test_basic_empty',
+        250,
+        50 * i
+      );
       chai.assert.equal((await getAllBlocks(this.browser)).length, i);
     }
   });
