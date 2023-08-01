@@ -362,7 +362,7 @@ async function switchRTL(browser) {
  */
 async function dragNthBlockFromFlyout(browser, categoryName, n, x, y) {
   const flyoutBlock = await getNthBlockOfCategory(browser, categoryName, n);
-  await flyoutBlock.dragAndDrop({x: x, y: y});
+  await flyoutBlock.dragAndDrop({x, y});
   return await getSelectedBlockElement(browser);
 }
 
@@ -387,7 +387,7 @@ async function dragBlockTypeFromFlyout(browser, categoryName, type, x, y) {
     categoryName,
     type,
   );
-  await flyoutBlock.dragAndDrop({x: x, y: y});
+  await flyoutBlock.dragAndDrop({x, y});
   return await getSelectedBlockElement(browser);
 }
 
