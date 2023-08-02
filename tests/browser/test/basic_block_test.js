@@ -23,8 +23,23 @@ suite('Basic block tests', function (done) {
   // to run than most mocha test
   this.timeout(0);
 
-  // Setup Selenium for all of the tests
+  // Add helper functions.
   suiteSetup(async function () {
+    /**
+     * Check that there are the expected number of blocks on the workspace.
+     * @param {number} expected Expected number of blocks.
+     */
+    this.assertCount = async function (expected) {
+      chai.assert.equal(
+        (await getAllBlocks(this.browser)).length,
+        expected,
+        'number of blocks on the workspace',
+      );
+    };
+  });
+
+  // Start each test by loading test blocks
+  setup(async function () {
     this.browser = await testSetup(
       testFileLocations.PLAYGROUND + '?toolbox=test-blocks',
     );
@@ -37,9 +52,9 @@ suite('Basic block tests', function (done) {
         'Basic',
         'test_basic_empty',
         250,
-        50 * i
+        50 * i,
       );
-      chai.assert.equal((await getAllBlocks(this.browser)).length, i);
+      await this.assertCount(i);
     }
   });
 });
