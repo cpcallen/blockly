@@ -123,13 +123,19 @@ let copyCoords: Coordinate | null = null;
 function isCopyable(
   focused: IFocusableNode,
 ): focused is ICopyable<ICopyData> & IDeletable & IDraggable {
-  return (
-    isICopyable(focused) &&
-    isIDeletable(focused) &&
-    focused.isDeletable() &&
-    isDraggable(focused) &&
-    focused.isMovable()
-  );
+  if (!isICopyable(focused) ||
+      !isIDeletable(focused) ||
+      !isDraggable(focused)) {
+    return false;
+  }
+  if (focused.isDeletable() && focused.isMovable()) return true;
+  if (focused instanceof BlockSvg && focused.isShadow()) {
+    const parent = focused.getParent();
+    if (parent) {
+      return isCopyable(parent);
+    }
+  }
+  return false;
 }
 
 /**
